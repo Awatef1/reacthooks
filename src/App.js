@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import {MovieList} from './Components/MovieList';
+import {MovieData} from './Data';
 import './App.css';
+import Filter from './Components/Filter';
+import AddModal from './Components/AddMovie';
+
 
 function App() {
+  const [movies, setMovies]=useState(MovieData);
+  const [FilterTitel,setFilterTitel]= useState("");
+  const [FilterRating,setFilterRating]= useState(0)
+
   return (
-    <div className="App">
+    <div className="App" style={{minHeight:"100vh"}}>
+      
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Filter  setFilterRating={setFilterRating}  FilterRataing={FilterRating} setFilterTitel={setFilterTitel} />
+      <AddModal setMovies={setMovies} movies={movies} />
+      <MovieList FilterRating={FilterRating} FilterTitel={FilterTitel} movies={movies} />
       </header>
+     
+     
     </div>
   );
 }
